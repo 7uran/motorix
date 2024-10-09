@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Halyard Display";
+  src: url("../fonts/fonnts.com-Halyard_Display.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Halyard Display", sans-serif;
+}
