@@ -10,5 +10,7 @@ export default function Home() {
     router.push('/wheels-and-tires');
   }, [router]);
 
-  return <div className='flex items-center justify-center w-full h-full'><Loader /></div>;
+  return <div className='flex items-center justify-center w-full h-full'>
+    <Loader />
+  </div>;
 }

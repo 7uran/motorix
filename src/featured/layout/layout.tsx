@@ -1,5 +1,4 @@
 "use client";
-import MouseFollower from "@/components/MouseFollower";
 import Header from "../header/header";
 import Footer from "../footer";
 import { usePathname } from "next/navigation";
@@ -10,7 +9,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     return (
         <main>
-            <MouseFollower />
+            
             {showHeaderFooter && <Header />}
             {children}
             {showHeaderFooter && <Footer />}

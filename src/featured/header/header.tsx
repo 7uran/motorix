@@ -13,11 +13,11 @@ const Header = () => {
                 </div>
                 <nav className='-translate-x-10'>
                     <ul className='flex text-white text-[17px] font-medium gap-6'>
-                        <li><p>Home</p></li>
-                        <li><p>Pages</p></li>
-                        <li><p>Portfolio</p></li>
-                        <li><p>Blog</p></li>
-                        <li><p>Shop</p></li>
+                        <li className='cursor-pointer'><p>Home</p></li>
+                        <li className='cursor-pointer'><p>Pages</p></li>
+                        <li className='cursor-pointer'><p>Portfolio</p></li>
+                        <li className='cursor-pointer'><p>Blog</p></li>
+                        <li className='cursor-pointer'><p>Shop</p></li>
                     </ul>
                 </nav>
                 <div className='flex items-center gap-6'>
