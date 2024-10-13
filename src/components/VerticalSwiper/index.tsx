@@ -6,8 +6,8 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import { Autoplay } from 'swiper/modules';
 import Image from 'next/image';
-import { sliderItems } from '@/mockdb';
 import { motion } from 'framer-motion';
+import { sliderItems } from '@/static/mockdb';
 
 const VerticalSwiper = () => {
     return (
@@ -39,15 +39,16 @@ const VerticalSwiper = () => {
                     />
                     <div className="absolute top-0 left-0 right-0 h-1/6 bg-gradient-to-b from-black opacity-50 to-transparent"></div>
                     <motion.div
+                        key={item.id}
                         className="absolute bottom-5 left-5 text-white w-full"
-                        initial={{ x: -100, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: 100, opacity: 0 }}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 50 }}
                         transition={{
                             type: "spring",
-                            stiffness: 300,
-                            damping: 20,
-                            duration: 1,
+                            stiffness: 100,
+                            damping: 30,
+                            duration: 2,
                         }}
                     >
                         {item.desc}

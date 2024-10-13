@@ -22,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${jost.variable} antialiased`}>
+      
         <Layout>
           {children}
         </Layout>
