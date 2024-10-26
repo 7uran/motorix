@@ -37,7 +37,7 @@ const VerticalSwiper = () => {
                         draggable="false"
                         className="transition-transform duration-1000 select-none"
                     />
-                    <div className="absolute top-0 left-0 right-0 h-1/6 bg-gradient-to-b from-black opacity-50 to-transparent"></div>
+                    <div className="absolute top-0 left-0 right-0 h-1/6 bg-gradient-to-b from-black opacity-50 to-transparent"> </div>
                     <motion.div
                         key={item.id}
                         className="absolute bottom-5 left-5 text-white w-full"

@@ -46,7 +46,7 @@ const ProductCard = () => {
             </div>
             <div className='flex flex-col gap-2 py-3'>
                 <span className='text-gray-500'>Alloy, Durability, Radial, Traction</span>
-                <p className='text-2xl font-semibold transition duration-500 cursor-pointer hover:text-main'>Stealth precision</p>
+                <p className='text-2xl font-medium transition duration-500 cursor-pointer hover:text-main'>Stealth precision</p>
                 <div className='text-[#FFC107] text-sm flex gap-0.5'>
                     <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
                 </div>
