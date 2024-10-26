@@ -106,7 +106,7 @@ export default function WheelsAndTires() {
                         <p className="uppercase font-medium tracking-wider ">New Arrivals</p>
                         <h1 className="md:text-6xl text-3xl font-medium">Popular wheels</h1>
                     </div>
-                    <div className="flex justify-between flex-wrap">
+                    <div className="flex justify-center md:justify-between flex-wrap">
                         {[...Array(3)].map((_, index) => (
                             <motion.div
                                 key={index}
@@ -165,7 +165,7 @@ export default function WheelsAndTires() {
                             </div>
                             <div
                                 ref={ref}
-                                className="md:w-[629px] md:h-[276px] md:-translate-x-[270px] translate-y-20 text-white bg-main font-semibold absolute flex items-center justify-between px-20"
+                                className="md:w-[629px] md:h-[276px]  md:-translate-x-[270px] translate-y-20 text-white bg-main font-semibold absolute flex items-center md:justify-between px-20"
                             >
                                 <div className="flex flex-col gap-3">
                                     <p className="text-xl ">Brands</p>
@@ -258,13 +258,13 @@ export default function WheelsAndTires() {
                 </div>
             </section>
             <section className="max-w-[1293px] mx-auto py-40">
-                <div className="flex flex-col items-center justify-center ">
+                <div className="flex flex-col items-center justify-center md:mt-0 mt-32  ">
                     <p className="text-sm uppercase">Top Sellers</p>
-                    <h1 className="text-6xl font-medium">
+                    <h1 className="md:text-6xl text-3xl font-medium">
                         Featured alloy wheels
                     </h1>
                 </div>
-                <div className="flex flex-wrap justify-between py-10 ">
+                <div className="flex flex-wrap justify-center md:justify-between py-10 ">
                     {[...Array(6)].map((_, index) => (
                         <motion.div
                             key={index}
@@ -293,9 +293,9 @@ export default function WheelsAndTires() {
                             />
                         ))}
                     </div>
-                    <div className="text-2xl w-[63%] flex flex-col gap-10">
+                    <div className="text-2xl w-[63%] flex  flex-col gap-10">
                         {commentsData[selectedCardIndex].comments.map((comment, idx) => (
-                            <p key={idx} className="transition-all duration-300">
+                            <p key={idx} className="transition-all flex justify-center duration-300">
                                 {comment}
                             </p>
                         ))}

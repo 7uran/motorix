@@ -14,7 +14,7 @@ const Footer = () => {
   return (
     <footer className=''>
       <div className='flex flex-col '>
-        <div className='bg-main '>
+        <div className='  qw '>
           <div className='max-w-[1493px] mx-auto py-8 w-full md:flex justify-between '>
             <div className='h-24 flex items-center gap-8 text-white border-r-gray-300 border-r w-full justify-center '>
               <MdOutlineCall className='text-5xl' />
@@ -49,8 +49,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className='bg-[#191919] pt-20 flex flex-col gap-32'>     
-          <div className='max-w-[1293px] mx-auto text-white flex '>
+        <div className='bg-[#191919] pt-20 flex flex-col gap-32'>
+          <div className='max-w-[1293px] mx-auto text-white flex md:flex-row flex-col md:gap-0 gap-10wq '>
             <div className='w-1/2 flex flex-col gap-32 '>
               <div>
                 <Image alt="Footer logo" src='https://motorix.themerex.net/wp-content/uploads/2024/01/logo-inverse.png' width={198} height={27} />
