@@ -1,4 +1,11 @@
 
+export const navItems = [
+    { name: "Home", path: "/wheels-and-tires" },
+    { name: "Pages", path: "/" },
+    { name: "Portfolio", path: "/portfolio" },
+    { name: "Blog", path: "/blog" },
+    { name: "Shop", path: "/shop" },
+];
 
 
 export const sliderItems = [
@@ -199,3 +206,39 @@ export const footerHome = [
         link: '/contact',
     }
 ]
+
+
+
+export const teamCardData = [
+    {
+        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-1-copyright-570x696.jpg',
+        name: 'Tom Jones',
+        job: 'Auto mechanic'
+    },
+    {
+        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-2-copyright-570x696.jpg',
+        name: 'Kevin Coleman',
+        job: 'Paint technician'
+    },
+    {
+        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-3-copyright-570x696.jpg',
+        name: 'Richard Gilmore',
+        job: 'Detailer'
+    },
+    {
+        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-4-copyright-570x696.jpg',
+        name: 'Nick Carter',
+        job: 'Upholstery specialist'
+    },
+    {
+        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-5-copyright-570x696.jpg',
+        name: 'Michael Lewis',
+        job: 'Bodywork expert'
+    },
+    {
+        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-6-copyright-570x696.jpg',
+        name: 'Christina Newman',
+        job: 'Diagnostic technician'
+    },
+
+];

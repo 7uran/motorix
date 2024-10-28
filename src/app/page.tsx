@@ -2,5 +2,5 @@ import { redirect } from 'next/navigation';
 
 export default function Home() {
   redirect('/wheels-and-tires');
-  return null; // Bu sayfa render edilmeyecek
+  return null; 
 }

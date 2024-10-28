@@ -1,18 +1,22 @@
 "use client";
 import Header from "../header/header";
-import Footer from "../footer";
+import Footer from "../footer/footer";
 import { usePathname } from "next/navigation";
 import GoUpButton from "@/components/GoUpButton";
+import HomePageFooter from "../HomePageFooter/homePageFooter";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname();
-    const showHeaderFooter = pathname === '/wheels-and-tires' || pathname === '/shop';
+    const pagesWithHeaderFooter = ['/wheels-and-tires', '/our-team', '/shop', '/faqs', '/pricing', '/contact'];
+    const showHeaderFooter = pagesWithHeaderFooter.includes(pathname);
 
     return (
         <main>
             {showHeaderFooter && <Header />}
             {children}
-            {showHeaderFooter && <Footer />}
+            {showHeaderFooter && (
+                pathname === '/wheels-and-tires' ? <HomePageFooter /> : <Footer />
+            )}
             <GoUpButton />
         </main>
     );

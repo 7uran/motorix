@@ -27,3 +27,13 @@ export interface StickyCardsProps {
     slug: string;
     image: string;
 }
+
+export interface PageBannerProps {
+    title: string;
+}
+
+export interface TeamCardProps {
+    img: string;
+    name: string;
+    job: string;
+}
