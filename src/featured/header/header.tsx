@@ -1,3 +1,4 @@
+"use client";
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { BsBagDash } from "react-icons/bs";
@@ -17,8 +18,8 @@ const Header = () => {
     };
 
     return (
-        <header className="absolute top-0 left-0 right-0 z-10 bg-transparent px-2 md:px-16 py-12 ">
-            <div className='flex justify-between '>
+        <header className={` top-0 left-0 right-0 z-10 px-2 md:px-16 py-12 ${pathname === '/wheels-and-tires' ? 'bg-transparent absolute' : 'bg-[#0D0D0D]'}`}>
+            <div className='flex justify-between'>
                 <div>
                     <Image alt='Motorix Logo' width={198} height={27} src={"https://motorix.themerex.net/wp-content/uploads/2024/01/logo-inverse.png"} />
                 </div>
@@ -55,8 +56,6 @@ const Header = () => {
                     </ul>
                 </nav>
 
-
-
                 <div className='flex items-center gap-6'>
                     <button className="flex items-center justify-center p-2">
                         <BsBagDash className='text-white text-3xl' />
@@ -73,7 +72,7 @@ const Header = () => {
             </div>
 
             <div
-                className={`absolute top-0 left-0 right-0 bg-[#191919] text-white  md:h-[469px] px-4 py-3 transition-transform duration-1000 ${isSearchOpen ? 'translate-y-0' : '-translate-y-full'}`}
+                className={`absolute top-0 left-0 right-0 bg-[#191919] text-white md:h-[469px] px-4 py-3 transition-transform duration-1000 ${isSearchOpen ? 'translate-y-0' : '-translate-y-full'}`}
             >
                 <div className='md:p-12 '>
                     <button

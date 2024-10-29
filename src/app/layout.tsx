@@ -21,12 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jost.variable} antialiased`}>
-      
+
+      <body className={`${jost.variable} antialiased bg-[#F0EEEF]`}>
+
         <Layout>
           {children}
         </Layout>
-
+        <script src="//code.tidio.co/xywkea6yqjsmb7fxs63spcmdgr1fudry.js" async></script>
       </body>
     </html>
   );

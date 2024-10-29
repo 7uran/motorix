@@ -5,12 +5,12 @@ import { teamCardData } from "@/static/mockdb";
 
 export default function OurTeam() {
     return (
-        <div className="min-h-screen bg-[#F0EEEF]  ">
+        <div className="min-h-screen  ">
             <div>
                 <PageBanner title="Our Team" />
             </div>
             <section className="max-w-[1293px] mx-auto py-40 ">
-                <div className="flex flex-wrap justify-between ">
+                <div className="flex flex-wrap justify-center md:justify-between ">
                     {
                         teamCardData.map((member, index) => (
                             <TeamCard key={index} img={member.img} name={member.name} job={member.job} />
