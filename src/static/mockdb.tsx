@@ -1,7 +1,12 @@
 
 export const navItems = [
     { name: "Home", path: "/wheels-and-tires" },
-    { name: "Pages", path: "/" },
+    {
+        name: "Pages", path: "/", type: "dropdown", subItems: [
+            { name: "Analytics", path: "/analytics", },
+            { name: "Engagement", path: "/engagement", },
+        ]
+    },
     { name: "Portfolio", path: "/portfolio" },
     { name: "Blog", path: "/blog" },
     { name: "Shop", path: "/shop" },
@@ -208,67 +213,3 @@ export const footerHome = [
 ]
 
 
-
-export const teamCardData = [
-    {
-        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-1-copyright-570x696.jpg',
-        name: 'Tom Jones',
-        job: 'Auto mechanic',
-        skills: [
-            { expertise: 80 },
-            { efficiency: 90 },
-            { proficiency: 88 }
-        ]
-    },
-    {
-        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-2-copyright-570x696.jpg',
-        name: 'Kevin Coleman',
-        job: 'Paint technician',
-        skills: [
-            { expertise: 80 },
-            { efficiency: 90 },
-            { proficiency: 85 }
-        ]
-    },
-    {
-        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-3-copyright-570x696.jpg',
-        name: 'Richard Gilmore',
-        job: 'Detailer',
-        skills: [
-            { expertise: 80 },
-            { efficiency: 90 },
-            { proficiency: 85 }
-        ]
-    },
-    {
-        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-4-copyright-570x696.jpg',
-        name: 'Nick Carter',
-        job: 'Upholstery specialist',
-        skills: [
-            { expertise: 80 },
-            { efficiency: 90 },
-            { proficiency: 85 }
-        ]
-    },
-    {
-        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-5-copyright-570x696.jpg',
-        name: 'Michael Lewis',
-        job: 'Bodywork expert',
-        skills: [
-            { expertise: 80 },
-            { efficiency: 90 },
-            { proficiency: 85 }
-        ]
-    },
-    {
-        img: 'https://motorix.themerex.net/wp-content/uploads/2024/01/team-6-copyright-570x696.jpg',
-        name: 'Christina Newman',
-        job: 'Diagnostic technician',
-        skills: [
-            { expertise: 80 },
-            { efficiency: 90 },
-            { proficiency: 85 }
-        ]
-    },
-
-];

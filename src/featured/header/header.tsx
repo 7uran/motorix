@@ -37,17 +37,17 @@ const Header = () => {
                                 </Link>
                                 {item.name === "Pages" && (
                                     <ul className='absolute left-0 bg-[#191919] mt-1 w-[200px] text-stone-400 rounded-sm shadow-lg text-sm transform scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-300'>
-                                        <li>
-                                            <Link href="/our-team" className='block px-4 py-6'>Our Team</Link>
+                                        <li className='group/team'>
+                                            <Link href="/our-team" className='transition group-hover/team:translate-x-3 block px-4 py-6'>Our Team</Link>
                                         </li>
-                                        <li>
-                                            <Link href="/faqs" className='block px-4 py-6'>FAQs</Link>
+                                        <li className='group/faqs'>
+                                            <Link href="/faqs" className='transition group-hover/faqs:translate-x-3 block px-4 py-6'>FAQs</Link>
                                         </li>
-                                        <li>
-                                            <Link href="/pricing" className='block px-4 py-6'>Pricing</Link>
+                                        <li className='group/pricing'>
+                                            <Link href="/pricing" className='transition group-hover/pricing:translate-x-3 block px-4 py-6'>Pricing</Link>
                                         </li>
-                                        <li>
-                                            <Link href="/contact" className='block px-4 py-6'>Contact</Link>
+                                        <li className='group/contact'>
+                                            <Link href="/contact" className='transition group-hover/contact:translate-x-3 block px-4 py-6'>Contact</Link>
                                         </li>
                                     </ul>
                                 )}

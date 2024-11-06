@@ -36,4 +36,23 @@ export interface TeamCardProps {
     img: string;
     name: string;
     job: string;
+    id: string;
+}
+
+
+export interface ProgressBarProps {
+    progress: number;
+}
+
+export interface TeamMember {
+    _id: string;
+    image: string;
+    name: string;
+    job: string;
+    skills: {
+        expertise: number;
+        efficiency: number;
+        proficiency: number;
+    };
+    createAt: string;
 }

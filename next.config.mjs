@@ -2,7 +2,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['motorix.themerex.net'],
+        domains: ['motorix.themerex.net', 'localhost','rvrnwheel.com'],
     },
 };
 
