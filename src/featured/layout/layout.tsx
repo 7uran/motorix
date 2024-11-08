@@ -7,7 +7,7 @@ import HomePageFooter from "../HomePageFooter/homePageFooter";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname();
-    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact'];
+    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog'];
     const showHeaderFooter = pagesWithHeaderFooter.includes(pathname) || pathname.startsWith('/our-team');
 
     return (

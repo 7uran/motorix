@@ -20,7 +20,7 @@ export default function Page() {
     const [error, setError] = useState<string | null>(null);
     const [teamId, setTeamId] = useState<string | null>(null);
 
-    // URL'deki 'id' parametresini al
+    
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');

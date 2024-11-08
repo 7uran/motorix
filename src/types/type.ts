@@ -56,3 +56,21 @@ export interface TeamMember {
     };
     createAt: string;
 }
+
+
+
+export interface AccordionProps {
+    title: string;
+    content: string;
+}
+
+export interface PricingCardProps {
+    title: string;
+    price: number;
+    isActive: boolean;
+}
+
+export interface PaintProtectionProps {
+    title: string;
+    index: number;
+}

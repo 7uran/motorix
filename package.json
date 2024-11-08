@@ -27,7 +27,8 @@
     "react-parallax-tilt": "^1.7.249",
     "react-toastify": "^10.0.6",
     "sass": "^1.79.4",
-    "swiper": "^11.1.14"
+    "swiper": "^11.1.14",
+    "tw-elements-react": "^1.0.0-alpha-end"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,5 +1,5 @@
 "use client";
-
+import GetQuote from "@/components/GetQuote";
 import PageBanner from "@/components/PageBanner";
 import TeamCard from "@/components/TeamCard";
 import TeamCardSkeleton from "@/components/TeamCardSkeleton";
@@ -31,32 +31,35 @@ export default function OurTeam() {
 
         fetchData();
     }, []);
-
+0
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="min-h-screen">
-            <PageBanner title="Our Team" />
-            <section className="max-w-[1293px] mx-auto py-40">
-                <div className="flex flex-wrap justify-center md:justify-between">
+        <>
+            <div className="min-h-screen">
+                <PageBanner title="Our Team" />
+                <section className="max-w-[1293px] mx-auto py-40">
+                    <div className="flex flex-wrap justify-center md:justify-between">
 
-                    {loading
-                        ? Array(6)
-                            .fill(null)
-                            .map((_, index) => (
-                                <TeamCardSkeleton key={index} />
-                            ))
-                        : data?.map((member: TeamMember) => (
-                            <TeamCard
-                                key={member._id}
-                                img={`http://localhost:3001${member.image}`}
-                                name={member.name}
-                                job={member.job}
-                                id={member._id}
-                            />
-                        ))}
-                </div>
-            </section>
-        </div>
+                        {loading
+                            ? Array(6)
+                                .fill(null)
+                                .map((_, index) => (
+                                    <TeamCardSkeleton key={index} />
+                                ))
+                            : data?.map((member: TeamMember) => (
+                                <TeamCard
+                                    key={member._id}
+                                    img={`http://localhost:3001${member.image}`}
+                                    name={member.name}
+                                    job={member.job}
+                                    id={member._id}
+                                />
+                            ))}
+                    </div>
+                </section>
+            </div>
+            <GetQuote />
+        </>
     );
 }

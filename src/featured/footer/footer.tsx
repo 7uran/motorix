@@ -9,19 +9,7 @@ const Footer = () => {
     return (
         <footer className=''>
             <div className='flex flex-col '>
-                <div className='bg-main '>
-                    <div className='max-w-[1293px] mx-auto md:px-0 px-10 py-20 flex flex-col md:flex-row justify-between  md:items-center'>
-                        <div className=''>
-                            <p className='md:text-6xl text-2xl text-white font-medium'>Get a 30% discount on car diagnostics</p>
-                        </div>
-                        <div>
-                            <button className='bg-white uppercase py-4 font-medium px-10'>
-                                Get a quote
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
+               
                 <div className='bg-[#191919] pt-20 flex flex-col gap-32'>
                     <div className='max-w-[1293px] mx-auto text-white font-medium md:flex-row flex-col flex justify-between w-full'>
                         <div className='md:text-5xl text-2xl w-[460px]'>

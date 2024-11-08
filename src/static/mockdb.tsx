@@ -213,3 +213,10 @@ export const footerHome = [
 ]
 
 
+
+
+export const accordions = [
+    { title: "How often should I change oil?", content: "Sed ut perspiciatis unde omnis iste natus error sit voluptatemiu accusantiumus doloremques laudantium, totam rem aperi." },
+    { title: "When should the tires be changed?", content: "Sed ut perspiciatis unde omnis iste natus error sit voluptatemiu accusantiumus doloremques laudantium, totam rem aperi." },
+    { title: "When should I replace the car battery?", content: "Sed ut perspiciatis unde omnis iste natus error sit voluptatemiu accusantiumus doloremques laudantium, totam rem aperi." },
+];
