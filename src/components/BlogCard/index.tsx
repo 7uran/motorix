@@ -7,22 +7,22 @@ import { useRouter } from 'next/navigation';
 const BlogCard: React.FC<BlogCardProps> = ({ _id, title, img, content, commentCount }) => {
     const router = useRouter();
 
-    
+
     const createSlug = (title: string) => {
         return title
-            .toLowerCase() 
-            .replace(/[^\w\s-]/g, '') 
-            .replace(/[\s_-]+/g, '-') 
-            .replace(/^-+|-+$/g, ''); 
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/[\s_-]+/g, '-')
+            .replace(/^-+|-+$/g, '');
     };
 
     const handleClick = () => {
-        const slug = createSlug(title); 
-        router.push(`/blog/${slug}?id=${_id}`); 
+        const slug = createSlug(title);
+        router.push(`/blog/${slug}?id=${_id}`);
     };
 
     return (
-        <div className='w-[840px] h-[341px] cursor-default bg-white flex' onClick={handleClick}>
+        <div className='md:w-[840px] w-fit md:flex-row flex-col md:h-[341px] cursor-default bg-white flex' onClick={handleClick}>
             <div className='w-[411px] h-[341px] overflow-hidden'>
                 <Image
                     alt="Blog Image"

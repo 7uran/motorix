@@ -95,3 +95,12 @@ export interface BlogProps {
         comment: string;
     }[];
 }
+
+export interface MiniBlogCardProps {
+    title: string;
+    img: string;
+}
+
+export interface TagProps {
+    text: string;
+}
