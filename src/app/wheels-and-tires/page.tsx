@@ -76,7 +76,7 @@ export default function WheelsAndTires() {
     }, [isVideoVisible]);
 
     return (
-        <div>
+        <div className="bg-white">
             <div className="relative">
                 <VerticalSwiper />
             </div>

@@ -74,3 +74,24 @@ export interface PaintProtectionProps {
     title: string;
     index: number;
 }
+
+export interface BlogCardProps {
+    _id: string;
+    title: string;
+    img: string;
+    content: string;
+    commentCount: number;
+
+}
+export interface BlogProps {
+    _id: string;
+    title: string;
+    image: string;
+    content: string;
+    comments: {
+        _id: string;
+        name: string;
+        location: string;
+        comment: string;
+    }[];
+}
