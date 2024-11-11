@@ -6,7 +6,7 @@ import ProductCard from "@/components/ProductCard";
 import StickyCards from "@/components/StickyCards";
 import VerticalSwiper from "@/components/VerticalSwiper";
 import WidgetCard from "@/components/WidgetCard";
-import { commentCardData, commentsData, WidgetCardImages } from "@/static/mockdb";
+import { commentsData, WidgetCardImages } from "@/static/mockdb";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,24 +14,36 @@ import { useEffect, useState } from "react";
 import CountUp from "react-countup";
 import Marquee from "react-fast-marquee";
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
-import { IoIosArrowRoundForward, IoIosPlay } from "react-icons/io";
+import { IoIosPlay } from "react-icons/io";
 import { useInView } from 'react-intersection-observer';
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useRouter } from "next/navigation";
+import { getData } from "@/utils/api";
+import { BlogsResponse } from "@/types/type";
 
 
 
 
 
 export default function WheelsAndTires() {
+    const router = useRouter();
     const [isVideoVisible, setIsVideoVisible] = useState(false);
     const { ref, inView } = useInView({ triggerOnce: true });
     const [startCount, setStartCount] = useState(false);
     const [selectedCardIndex, setSelectedCardIndex] = useState(0);
     const [currentCommentIndex, setCurrentCommentIndex] = useState(0);
+    const [blogsData, setBlogsData] = useState<BlogsResponse | null>(null);
 
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            const data = await getData("http://localhost:3001/api/v1/blogs");
+            if (data) setBlogsData(data);
+        };
+        fetchBlogs();
+    }, []);
     const handleCardClick = (index: number) => {
         setSelectedCardIndex(index);
     };
@@ -124,7 +136,7 @@ export default function WheelsAndTires() {
                         ))}
                     </div>
                     <div className="flex items-center justify-center">
-                        <button className="hover:bg-[#ee5600] transition duration-300 uppercase bg-main text-sm text-white w-[215px] h-[56px] font-semibold tracking-wider ">view all wheels</button>
+                        <button onClick={() => router.push("/shop")} className="hover:bg-[#ee5600] transition duration-300 uppercase bg-main text-sm text-white w-[215px] h-[56px] font-semibold tracking-wider ">view all wheels</button>
                     </div>
 
                 </div>
@@ -224,7 +236,7 @@ export default function WheelsAndTires() {
                                 <p className="md:text-6xl font-semibold">
                                     Review of the latest arrivals<br /> in wheels and tires
                                 </p>
-                                <button className="hover:bg-[#ee5600] transition duration-300 uppercase bg-main text-sm text-white w-[215px] h-[56px] font-semibold tracking-wider">
+                                <button onClick={() => router.push("/shop")} className="hover:bg-[#ee5600] transition duration-300 uppercase bg-main text-sm text-white w-[215px] h-[56px] font-semibold tracking-wider">
                                     view all wheels
                                 </button>
                             </div>
@@ -322,85 +334,79 @@ export default function WheelsAndTires() {
                     <StickyCards
                         image={"https://motorix.themerex.net/wp-content/uploads/2024/01/img-28-copyright.jpg"}
                         index={1}
-                        type={"Wheels"}
-                        title={"Chrome elegance"}
-                        desc={"Chrome elegance"}
+                        type={"Turbine wheels"}
+                        title={"Porsche alloy wheels"}
+                        desc={"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."}
                         slug={"wheels"}
                     />
 
                     <StickyCards
-                        image={"https://motorix.themerex.net/wp-content/uploads/2024/01/img-28-copyright.jpg"}
-                        index={1}
-                        type={"Wheels"}
-                        title={"Chrome elegance"}
-                        desc={"Chrome elegance"}
+                        image={"https://motorix.themerex.net/wp-content/uploads/2024/01/img-34-copyright.jpg"}
+                        index={2}
+                        type={"intricate design"}
+                        title={"Satin gold wheels"}
+                        desc={"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."}
                         slug={"wheels"}
                     />
 
 
                     <StickyCards
-                        image={"https://motorix.themerex.net/wp-content/uploads/2024/01/img-28-copyright.jpg"}
-                        index={1}
-                        type={"Wheels"}
-                        title={"Chrome elegance"}
-                        desc={"Chrome elegance"}
+                        image={"https://motorix.themerex.net/wp-content/uploads/2024/01/img-33-copyright.jpg"}
+                        index={3}
+                        type={"Luxury quality"}
+                        title={"Performance wheels"}
+                        desc={"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."}
                         slug={"wheels"}
                     />
                 </div>
             </section>
 
             <section>
-                <div className="max-w-[1293px] mx-auto py-20 ">
+                <div className="max-w-[1293px] mx-auto py-20">
                     <div className="flex items-center flex-col">
                         <p className="uppercase text-sm font-medium">our blog</p>
                         <p className="text-6xl font-medium">Tips and latest news</p>
                     </div>
                     <div className="py-16">
-                        <Swiper
-                            slidesPerView={3}
-                            spaceBetween={30}
-                            pagination={{ clickable: true }}
-                            modules={[Pagination]}
-                            className="mySwiper"
-                            breakpoints={{
-
-                                640: {
-                                    slidesPerView: 1,
-                                    spaceBetween: 20,
-                                },
-                                768: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 30,
-                                },
-                                1024: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 30,
-                                },
-                            }}
-                        >
-                            {
-                                [...Array(6)].map((_, index) => (
-                                    <SwiperSlide key={index}>
+                        {blogsData?.blogs?.length ? (
+                            <Swiper
+                                slidesPerView={3}
+                                spaceBetween={30}
+                                pagination={{ clickable: true }}
+                                modules={[Pagination]}
+                                className="mySwiper"
+                                breakpoints={{
+                                    640: { slidesPerView: 1, spaceBetween: 20 },
+                                    768: { slidesPerView: 2, spaceBetween: 30 },
+                                    1024: { slidesPerView: 3, spaceBetween: 30 },
+                                }}
+                            >
+                                {blogsData.blogs.map((blog) => (
+                                    <SwiperSlide key={blog._id}>
                                         <motion.div
                                             initial={{ opacity: 0, y: 20 }}
                                             whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{
-                                                duration: 0.7,
-                                                delay: 0.2,
-                                            }}
+                                            transition={{ duration: 0.7, delay: 0.2 }}
                                             viewport={{ once: true }}
                                             className="w-fit"
                                         >
-                                            <BlogCardHome />
+                                            <BlogCardHome
+                                                _id={blog._id}
+                                                title={blog.title}
+                                                img={`http://localhost:3001/${blog.image}`}
+                                                commentCount={blog.comments?.length || 0}
+                                            />
                                         </motion.div>
                                     </SwiperSlide>
-                                ))
-                            }
-                        </Swiper>
+                                ))}
+                            </Swiper>
+                        ) : (
+                            <p className="text-center text-gray-500">No blogs available</p>
+                        )}
                     </div>
-
                 </div>
-            </section >
+            </section>
+
 
         </div >
     );

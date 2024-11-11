@@ -104,3 +104,23 @@ export interface MiniBlogCardProps {
 export interface TagProps {
     text: string;
 }
+
+
+export interface BlogCardHomeProps {
+    title: string;
+    img: string;
+    commentCount: number;
+    _id: string;
+}
+
+export interface Blog {
+    _id: string;
+    title: string;
+    image: string;
+    comments: { text: string }[];
+}
+
+export interface BlogsResponse {
+    totalCount: number;
+    blogs: Blog[];
+}

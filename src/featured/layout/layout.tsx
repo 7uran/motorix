@@ -4,6 +4,7 @@ import Footer from "../footer/footer";
 import { usePathname } from "next/navigation";
 import GoUpButton from "@/components/GoUpButton";
 import HomePageFooter from "../HomePageFooter/homePageFooter";
+import { ToastContainer } from "react-toastify";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname();
@@ -18,6 +19,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 pathname === '/wheels-and-tires' ? <HomePageFooter /> : <Footer />
             )}
             <GoUpButton />
+            <ToastContainer />
         </main>
     );
 };

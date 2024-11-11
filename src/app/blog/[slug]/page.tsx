@@ -8,7 +8,7 @@ import { BiSolidQuoteAltLeft } from "react-icons/bi";
 import Tag from "@/components/Tag";
 import { IoHeartOutline } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaDribbble, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
 import { IoIosLink } from "react-icons/io";
 
@@ -115,8 +115,83 @@ export default function Page() {
                                         <button className="bg-[#7A7E83] rounded-full flex items-center justify-center hover:-translate-y-1 w-[45px] h-[45px] transition duration-300 text-white"><TfiEmail />
                                         </button>
                                         <button className="bg-white rounded-full flex items-center justify-center hover:-translate-y-1 w-[45px] h-[45px] transition duration-300 "><IoIosLink />
-
                                         </button>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div className="flex justify-between">
+                                        <button className="flex items-center gap-1 text-sm uppercase text-gray-400 font-medium">
+                                            <FaAngleLeft />Previuos
+                                        </button>
+
+                                        <button className="flex items-center gap-1 text-sm uppercase text-gray-400 font-medium">
+                                            Next<FaAngleRight />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="bg-white flex h-[226px] p-8 gap-5">
+                                    <div>
+                                        <Image alt="" width={78} height={78} src={"https://secure.gravatar.com/avatar/034d0d50b729d2cb6a0ef19af78238cd?s=120&d=mm&r=g"} />
+                                    </div>
+                                    <div className="flex flex-col gap-3">
+                                        <p className="text-lg font-medium hover:text-main duration-300 transition cursor-pointer">Ashton Porter</p>
+                                        <span className="text-gray-400 text-sm uppercase">About Author</span>
+                                        <p className="text-gray-400 text-lg">Phasellus et ipsum justo. Aenean fringilla a fermentum mauris non venenatis.<br /> Praesent at nulla aliquam ligula.</p>
+                                        <div className="flex gap-5 items-center text-sm cursor-pointer "><FaFacebookF className="hover:text-main duration-300 transition" /><FaXTwitter className="hover:text-main duration-300 transition" /><FaDribbble className="hover:text-main duration-300 transition" /> <FaInstagram className="hover:text-main duration-300 transition" /></div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col gap-6">
+                                    <p className="text-4xl font-medium">0 Comments</p>
+                                    <div className="flex gap-6">
+                                        <div>
+                                            <Image width={78} height={78} alt="" className="rounded-full" src={"https://secure.gravatar.com/avatar/ff17b4a4115455660e0779a4a8e71592?s=90&d=mm&r=g"} />
+                                        </div>
+                                        <div>
+                                            <div className="flex gap-2 items-center">
+                                                <p className="text-lg font-medium">Test</p>
+                                                <span className="text-sm text-stone-400">Nov 11, 2024 at 12:19 pm</span>
+                                            </div>
+                                            <div>
+                                                <p className="text-lg text-stone-600">test</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col gap-3">
+                                    <p className="text-4xl font-medium">Leave a comment</p>
+                                    <div className="flex flex-col gap-6">
+                                        <div className="flex gap-8">
+                                            <input className="border-b font-sans focus:outline-dashed bg-transparent focus:placeholder:text-black placeholder:duration-300 placeholder:transition duration-300 transition border-b-gray-400 w-full py-3" placeholder="Your Name *" />
+                                            <input className="border-b font-sans focus:outline-dashed bg-transparent focus:placeholder:text-black placeholder:duration-300 placeholder:transition duration-300 transition border-b-gray-400 w-full py-3" placeholder="Your E-mail *" />
+                                        </div>
+                                        <div>
+                                            <textarea rows={3} cols={30} placeholder="Your comment *" className="font-sans resize-none border-b focus:outline-dashed bg-transparent focus:placeholder:text-black placeholder:duration-300 placeholder:transition duration-300 transition border-b-gray-400 w-full py-3  "  >
+                                            </textarea>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                className="hidden"
+                                                type="radio"
+                                                id="subscribe"
+                                                name="agreement"
+                                                value="yes"
+                                            />
+                                            <label
+                                                htmlFor="subscribe"
+                                                className="flex items-center cursor-pointer text-stone-400 group"
+                                            >
+                                                <span className="w-5 h-5 mr-2 inline-block border-2 border-gray-300 transition duration-300 rounded-md group-hover:border-gray-500 relative">
+                                                    <span className="absolute w-3 h-3 bg-black rounded-full opacity-0 group-checked:opacity-100 left-1 top-1"></span>
+                                                </span>
+                                                I agree that my submitted data is being collected and stored.
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <button className="uppercase bg-main text-white font-medium px-10 py-4 hover:bg-orange-600 transition duration-300">leave a comment</button>
+                                        </div>
+
                                     </div>
 
                                 </div>
