@@ -5,14 +5,15 @@ import { FaRegEye } from "react-icons/fa6";
 import { HiOutlineShoppingCart } from 'react-icons/hi2';
 import { FaStar } from "react-icons/fa6";
 import ShopCardModal from '../ShopCardModal';
+import { ShopCardProps } from '@/types/type';
 
-
-const ShopCard = () => {
+const ShopCard: React.FC<ShopCardProps> = ({ title, price, rating, image, id, category }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+    const formattedPrice = `${price.toLocaleString('en-US')}.00`;
 
     useEffect(() => {
         if (isModalOpen) {
@@ -51,12 +52,12 @@ const ShopCard = () => {
                 </div>
             </div>
             <div>
-                <p className='font-medium text-lg hover:text-main duration-300 transition cursor-pointer'>
-                    Stealth precision
+                <p className='font-medium text-xl hover:text-main duration-300 transition cursor-pointer'>
+                    {title}
                 </p>
-                <span className='text-lg text-gray-600'>$155.00 – $161.00</span>
-                <div className='text-[#FFC107] flex gap-1'>
-                    {Array(5)
+                <span className='text-lg text-gray-600'>${formattedPrice}</span>
+                <div className='text-[#FFC107] text-sm flex gap-1'>
+                    {Array(rating)
                         .fill(0)
                         .map((_, i) => (
                             <FaStar key={i} />
@@ -64,11 +65,15 @@ const ShopCard = () => {
                 </div>
             </div>
 
-
             <ShopCardModal
                 isOpen={isModalOpen}
                 onClose={closeModal}
-
+                title={title}
+                price={price}
+                rating={rating}
+                image={image}
+                id={id}
+                category={category}
             />
         </div>
     );

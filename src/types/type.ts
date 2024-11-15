@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface WidgetCardProps {
     src: string;
 }
@@ -132,7 +134,49 @@ export interface YouMayLikeBlogProps {
 
 
 export interface ShopCustomCheckboxProps {
-    label: string;
+
     value: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    label: ReactNode;
+}
+
+
+export interface Comment {
+    publisher: string;
+    content: string;
+    rating: number;
+    _id: string;
+}
+
+export interface ShopCardData {
+    _id: string;
+    name: string;
+    image: string;
+    description: string;
+    category: string;
+    brand: string;
+    rating: number;
+    comments: Comment[];
+}
+
+
+export interface ShopCardProps {
+    title: string;
+    price: number;
+    rating: number;
+    image: string;
+    id: string;
+    category: string;
+}
+
+export interface ShopCardModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    price: number;
+    rating: number;
+    image: string;
+    id: string;
+    category: string;
+
 }

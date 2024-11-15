@@ -17,15 +17,16 @@ const ShopCustomCheckbox: React.FC<ShopCustomCheckboxProps> = ({ label, value, o
                 onChange={handleCheckboxChange}
                 className="hidden"
                 checked={isChecked}
+                aria-checked={isChecked ? 'true' : 'false'}
             />
             <span
-                className={`w-5 h-5  border-2 ${isChecked ? 'bg-black' : 'bg-transparent'} border-gray-400 flex items-center justify-center rounded-sm`}
+                className={`w-5 h-5 border-4 border-[#F0EEEF] ${isChecked ? 'bg-black' : 'bg-[#F0EEEF]'} border-gray-400 flex items-center justify-center rounded-sm`}
             >
 
             </span>
-            <span className="text-lg font-medium">{label}</span>
+            <span className="text-lg font-medium flex ">{label}</span>
         </label>
     );
-}
+};
 
 export default ShopCustomCheckbox;
