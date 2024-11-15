@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import "./globals.scss";
 import Layout from "@/featured/layout/layout";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const jost = Jost({
   subsets: ["latin"],
@@ -21,14 +24,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-
       <body className={`${jost.variable} antialiased bg-[#F0EEEF]`}>
-
         <Layout>
           {children}
         </Layout>
+
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
         <script src="//code.tidio.co/xywkea6yqjsmb7fxs63spcmdgr1fudry.js" async></script>
       </body>
     </html>
   );
-} 
+}

@@ -61,7 +61,7 @@ export interface TeamMember {
 
 export interface AccordionProps {
     title: string;
-    content: string;
+    content: React.ReactNode;
 }
 
 export interface PricingCardProps {
@@ -123,4 +123,16 @@ export interface Blog {
 export interface BlogsResponse {
     totalCount: number;
     blogs: Blog[];
+}
+
+export interface YouMayLikeBlogProps {
+    title: string;
+    img: string;
+}
+
+
+export interface ShopCustomCheckboxProps {
+    label: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
