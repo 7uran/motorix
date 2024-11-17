@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+
 import { GoHeart } from "react-icons/go";
 import { FaRegEye } from "react-icons/fa6";
 import { HiOutlineShoppingCart } from 'react-icons/hi2';
 import { FaStar } from "react-icons/fa6";
 import ShopCardModal from '../ShopCardModal';
 import { ShopCardProps } from '@/types/type';
+import { useRouter } from 'next/navigation';
 
 const ShopCard: React.FC<ShopCardProps> = ({ title, price, rating, image, id, category }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const router = useRouter();
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -26,15 +29,23 @@ const ShopCard: React.FC<ShopCardProps> = ({ title, price, rating, image, id, ca
         };
     }, [isModalOpen]);
 
+    const handleRedirect = () => {
+        router.push(`/shop/product?id=${id}`);
+    };
+
     return (
         <div className='w-[250px] group flex flex-col gap-3'>
-            <div className='relative w-[250px] h-[250px] overflow-hidden bg-black'>
+            <div
+                className='relative w-[250px] h-[250px] overflow-hidden bg-black cursor-pointer'
+
+            >
                 <Image
                     className='group-hover:opacity-90 duration-300 transition'
-                    alt='ShopCard'
-                    src='https://motorix.themerex.net/wp-content/uploads/2024/01/prod-1-copyright-630x630.jpg'
+                    alt={title}
+                    src={`http://localhost:3001/${image}`}
                     width={250}
                     height={250}
+                    onClick={handleRedirect}
                 />
                 <button className='text hover:text-stone-600 transition duration-300 absolute top-4 right-4 text-xl flex items-center justify-center bg-[#F0EEEF] rounded-full w-[40px] h-[40px]'>
                     <GoHeart />
@@ -52,7 +63,10 @@ const ShopCard: React.FC<ShopCardProps> = ({ title, price, rating, image, id, ca
                 </div>
             </div>
             <div>
-                <p className='font-medium text-xl hover:text-main duration-300 transition cursor-pointer'>
+                <p
+                    className='font-medium text-xl hover:text-main duration-300 transition cursor-pointer'
+                    onClick={handleRedirect}
+                >
                     {title}
                 </p>
                 <span className='text-lg text-gray-600'>${formattedPrice}</span>

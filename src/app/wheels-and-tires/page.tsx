@@ -36,6 +36,7 @@ export default function WheelsAndTires() {
     const [selectedCardIndex, setSelectedCardIndex] = useState(0);
     const [currentCommentIndex, setCurrentCommentIndex] = useState(0);
     const [blogsData, setBlogsData] = useState<BlogsResponse | null>(null);
+    const [shopCards, setShopCards] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchBlogs = async () => {
@@ -67,7 +68,20 @@ export default function WheelsAndTires() {
     const handleVideoClick = () => {
         setIsVideoVisible(true);
     };
+    useEffect(() => {
+        const fetchShopCards = async () => {
+            const data = await getData("http://localhost:3001/api/v1/shopCards");
 
+            if (data && Array.isArray(data.shopCards)) {
+                setShopCards(data.shopCards);
+            } else {
+                console.error("Invalid data format:", data);
+                setShopCards([]);
+            }
+        };
+
+        fetchShopCards();
+    }, []);
     const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) {
             setIsVideoVisible(false);
@@ -119,7 +133,7 @@ export default function WheelsAndTires() {
                         <h1 className="md:text-6xl text-3xl font-medium">Popular wheels</h1>
                     </div>
                     <div className="flex justify-center md:justify-between flex-wrap">
-                        {[...Array(3)].map((_, index) => (
+                        {shopCards.slice(0, 3).map((card, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
@@ -129,12 +143,19 @@ export default function WheelsAndTires() {
                                     delay: index * 0.2
                                 }}
                                 viewport={{ once: true }}
-                                className="w-fit "
+                                className="w-fit"
                             >
-                                <ProductCard />
+                                <ProductCard
+                                    img={card.image}
+                                    title={card.name}
+                                    rating={card.rating}
+                                    price={card.price}
+                                    url={`shop/product?id=${card._id}`}
+                                />
                             </motion.div>
                         ))}
                     </div>
+
                     <div className="flex items-center justify-center">
                         <button onClick={() => router.push("/shop")} className="hover:bg-[#ee5600] transition duration-300 uppercase bg-main text-sm text-white w-[215px] h-[56px] font-semibold tracking-wider ">view all wheels</button>
                     </div>

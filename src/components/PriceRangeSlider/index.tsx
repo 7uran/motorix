@@ -42,9 +42,9 @@ const PriceRangeSlider = () => {
                 )}
             />
 
-            <div className="flex justify-between items-center ">
-                <span className="text-stone-500">{values[0]}</span>
-                <span className="text-stone-500">{values[1]}</span>
+            <div className="flex justify-between items-center  select-none ">
+                <span className="text-stone-500 select-none">{values[0]}</span>
+                <span className="text-stone-500 select-none">{values[1]}</span>
             </div>
         </div>
     );

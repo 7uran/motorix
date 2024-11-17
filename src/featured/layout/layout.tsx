@@ -10,7 +10,7 @@ import Loader from "@/components/Loader";
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname();
     const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog'];
-    const showHeaderFooter = pagesWithHeaderFooter.includes(pathname) || pathname.startsWith('/our-team') || pathname.includes('/blog/');
+    const showHeaderFooter = pagesWithHeaderFooter.includes(pathname) || pathname.startsWith('/our-team') || pathname.includes('/blog/') || pathname.includes('/shop/');
 
     const [loading, setLoading] = useState(true);
 

@@ -20,7 +20,7 @@ const ShopCustomCheckbox: React.FC<ShopCustomCheckboxProps> = ({ label, value, o
                 aria-checked={isChecked ? 'true' : 'false'}
             />
             <span
-                className={`w-5 h-5 border-4 border-[#F0EEEF] ${isChecked ? 'bg-black' : 'bg-[#F0EEEF]'} border-gray-400 flex items-center justify-center rounded-sm`}
+                className={`w-5 h-5 border-4 border-[#F0EEEF] ${isChecked ? 'bg-black' : 'bg-[#F0EEEF]'}  flex items-center justify-center rounded-sm`}
             >
 
             </span>

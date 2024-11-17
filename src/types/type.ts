@@ -180,3 +180,31 @@ export interface ShopCardModalProps {
     category: string;
 
 }
+
+
+export interface Comment {
+    publisher: string;
+    content: string;
+    rating: number;
+    _id: string;
+}
+
+export interface Product {
+    _id: string;
+    name: string;
+    image: string;
+    description: string;
+    category: string;
+    brand: string;
+    rating: number;
+    price: number;
+    comments: Comment[];
+}
+
+export interface ProductCardProps {
+    img: string;
+    title: string;
+    rating: number;
+    price: number;
+    url: string;
+}

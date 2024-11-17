@@ -13,11 +13,11 @@ interface ShopPageProps { }
 
 const ShopPage: React.FC<ShopPageProps> = () => {
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-    const [selectedRatings, setSelectedRatings] = useState<number[]>([]); // Rating filter state
+    const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
     const [shopCards, setShopCards] = useState<any[]>([]);
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value, checked } = e.target;
+        const { value, checked } = e.target; 
         setSelectedBrands((prev) =>
             checked ? [...prev, value] : prev.filter((item) => item !== value)
         );
@@ -46,7 +46,7 @@ const ShopPage: React.FC<ShopPageProps> = () => {
         fetchShopCards();
     }, []);
 
-    // Filter shop cards based on selected ratings and brands
+
     const filteredShopCards = shopCards.filter((card) => {
         const matchesRating = selectedRatings.length === 0 || selectedRatings.includes(card.rating);
         const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(card.brand);
