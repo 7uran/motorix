@@ -28,7 +28,7 @@ const ShopPage: React.FC<ShopPageProps> = () => {
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
     const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 1200]);
     const [shopCards, setShopCards] = useState<ShopCardData[]>([]);
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,8 +91,8 @@ const ShopPage: React.FC<ShopPageProps> = () => {
     return (
         <div className="bg-white">
             <PageBanner title="Shop" />
-            <div className="max-w-[1440px] mt-20 min-h-screen flex gap-12 mx-auto w-full">
-                <div className="w-[270px] flex flex-col top-0 sticky h-fit">
+            <div className="max-w-[1440px] mt-20 min-h-screen md:flex-row flex-col flex gap-12 mx-auto w-full">
+                <div className="w-[270px] flex flex-col  top-0 md:sticky h-fit">
                     <ShopAccordion
                         title="Filter by category"
                         content={
@@ -173,7 +173,7 @@ const ShopPage: React.FC<ShopPageProps> = () => {
                     />
                 </div>
 
-                <div className="flex-1 grid grid-cols-4 gap-6 py-10
+                <div className="flex-1 justify-center md:justify-normal grid md:grid-cols-4 gap-6 py-10
                 ">
                     {filteredShopCards.map((card) => (
                         <ShopCard

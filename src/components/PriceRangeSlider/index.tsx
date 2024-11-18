@@ -10,21 +10,21 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ value, onChange }) 
     const min = 10;
     const max = 1200;
 
-    // Ensure that the initial value is within the valid range
+
     const [values, setValues] = useState<[number, number]>(
         [
-            Math.max(min, value[0]), // Ensure the first value is not smaller than min
-            Math.min(max, value[1])  // Ensure the second value is not larger than max
+            Math.max(min, value[0]),
+            Math.min(max, value[1])
         ]
     );
 
     const handleRangeChange = (newValues: number[]) => {
         const [newMinValue, newMaxValue] = newValues;
 
-        // Clamp the new values within the valid range
+
         const validValues: [number, number] = [
-            Math.max(min, Math.min(newMinValue, max)), // First value should be within min and max
-            Math.max(min, Math.min(newMaxValue, max)) // Second value should be within min and max
+            Math.max(min, Math.min(newMinValue, max)),
+            Math.max(min, Math.min(newMaxValue, max))
         ];
 
         setValues(validValues);
@@ -32,7 +32,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ value, onChange }) 
     };
 
     useEffect(() => {
-        // Ensure the new prop values are also within the valid range
+
         setValues([
             Math.max(min, value[0]),
             Math.min(max, value[1])

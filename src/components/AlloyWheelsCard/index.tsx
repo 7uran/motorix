@@ -14,15 +14,15 @@ const AlloyWheelsCard: React.FC<AlloyWheelsCardProps> = ({ title, price, img, id
         maximumFractionDigits: 2,
     }).format(price);
 
-    // Handle card click to navigate to the product page
+  
     const handleCardClick = () => {
         router.push(`/shop/product?id=${id}`);
     };
 
-    // Prevent navigation when clicking the quick view button
+
     const handleQuickViewClick = (e: React.MouseEvent) => {
-        e.stopPropagation();  // Prevent the parent div's onClick from firing
-        onQuickViewClick(id);  // Trigger the quick view function
+        e.stopPropagation();  
+        onQuickViewClick(id); 
     };
 
     return (
@@ -34,7 +34,7 @@ const AlloyWheelsCard: React.FC<AlloyWheelsCardProps> = ({ title, price, img, id
                 </button>
                 <button
                     className='bg-[#EFEDEE] transition duration-300 hover:text-gray-600 w-full gap-2 capitalize flex items-center opacity-0 justify-center h-[52px] group-hover:opacity-100 group-hover:-translate-y-[52px]'
-                    onClick={handleQuickViewClick}  // Call the new function for quick view
+                    onClick={handleQuickViewClick}  
                 >
                     <IoEyeOutline />
                     <span className='font-semibold'> quick view</span>
