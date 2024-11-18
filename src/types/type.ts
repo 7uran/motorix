@@ -5,9 +5,11 @@ export interface WidgetCardProps {
 }
 
 export interface AlloyWheelsCardProps {
+    id: string;
     title: string;
     price: number;
     img: string;
+    onQuickViewClick: (id: string) => void;
 }
 
 export interface CommentCardProps {
@@ -201,10 +203,19 @@ export interface Product {
     comments: Comment[];
 }
 
+
 export interface ProductCardProps {
     img: string;
     title: string;
     rating: number;
     price: number;
     url: string;
+}
+
+export interface RelatedProductsProps {
+    image: string;
+    name: string;
+    rating: number;
+    price: number;
+    _id: string;
 }

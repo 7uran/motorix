@@ -23,12 +23,21 @@ import 'swiper/css/pagination';
 import { useRouter } from "next/navigation";
 import { getData } from "@/utils/api";
 import { BlogsResponse } from "@/types/type";
+import ShopCardModal from "@/components/ShopCardModal";
 
 
 
 
 
 export default function WheelsAndTires() {
+    interface Product {
+        _id: string;
+        name: string;
+        price: number;
+        image: string;
+        rating: number;
+        category: string;
+    }
     const router = useRouter();
     const [isVideoVisible, setIsVideoVisible] = useState(false);
     const { ref, inView } = useInView({ triggerOnce: true });
@@ -37,6 +46,22 @@ export default function WheelsAndTires() {
     const [currentCommentIndex, setCurrentCommentIndex] = useState(0);
     const [blogsData, setBlogsData] = useState<BlogsResponse | null>(null);
     const [shopCards, setShopCards] = useState<any[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleQuickViewClick = (id: string) => {
+        const product = shopCards.find(card => card._id === id);
+        if (product) {
+            setSelectedProduct(product);
+            console.log(selectedProduct);
+
+            setIsModalOpen(true);
+        }
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     useEffect(() => {
         const fetchBlogs = async () => {
@@ -298,21 +323,42 @@ export default function WheelsAndTires() {
                     </h1>
                 </div>
                 <div className="flex flex-wrap justify-center md:justify-between py-10 ">
-                    {[...Array(6)].map((_, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{
-                                duration: 0.7,
-                                delay: index * 0.2
-                            }}
-                            viewport={{ once: true }}
-                            className="w-fit "
-                        >
-                            <AlloyWheelsCard title={"Chrome elegance"} price={1115} img={"https://motorix.themerex.net/wp-content/uploads/2024/01/prod-4-copyright-630x630.jpg"} />
-                        </motion.div>
-                    ))}   </div>
+                    {shopCards
+                        .filter(card => card.category === "Custom wheels")
+                        .slice(0, 6)
+                        .map((card, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.7,
+                                    delay: index * 0.2
+                                }}
+                                viewport={{ once: true }}
+                                className="w-fit"
+                            >
+                                <AlloyWheelsCard
+                                    id={card._id}
+                                    title={card.name}
+                                    price={card.price}
+                                    img={card.image}
+                                    onQuickViewClick={handleQuickViewClick}
+                                />
+                            </motion.div>
+                        ))}
+                    <ShopCardModal
+                        isOpen={isModalOpen}
+                        onClose={handleCloseModal}
+                        title={selectedProduct?.name || 'Default Product Name'}
+                        price={selectedProduct?.price || 0}
+                        rating={selectedProduct?.rating || 0}
+                        image={selectedProduct?.image || ''}
+                        id={selectedProduct?._id || ''}
+                        category={selectedProduct?.category || 'Default Category'}
+                    />
+                </div>
+
             </section>
             <section className="max-w-[1293px] mx-auto ">
                 <div className="flex md:flex-row flex-col-reverse  justify-between">
