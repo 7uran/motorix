@@ -28,7 +28,7 @@ export default function Blog() {
             const result = await getData(
                 `http://localhost:3001/api/v1/blogs?offset=${(page - 1) * ITEMS_PER_PAGE}&limit=${ITEMS_PER_PAGE}`
             );
-            console.log(result);
+     
             if (result && result.blogs) {
                 setBlogs(result.blogs);
                 setTotalCount(result.totalCount || 0);

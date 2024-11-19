@@ -53,7 +53,7 @@ export default function WheelsAndTires() {
         const product = shopCards.find(card => card._id === id);
         if (product) {
             setSelectedProduct(product);
-            console.log(selectedProduct);
+         
 
             setIsModalOpen(true);
         }
