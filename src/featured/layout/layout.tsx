@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname();
     const router = useRouter();
-    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog'];
+    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog', '/checkout'];
     const showHeaderFooter = pagesWithHeaderFooter.includes(pathname) || pathname.startsWith('/our-team') || pathname.includes('/blog/') || pathname.includes('/shop/');
 
     const [loading, setLoading] = useState(true);

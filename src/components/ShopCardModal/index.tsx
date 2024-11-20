@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import { IoIosHeartEmpty, IoIosStar, IoMdClose } from "react-icons/io";
+import { IoIosHeartEmpty, IoIosHeart, IoIosStar, IoMdClose } from "react-icons/io";
 import { motion } from "framer-motion";
 import { ShopCardModalProps } from '@/types/type';
-import { PiArrowsClockwise } from "react-icons/pi";
 import Loader from '../Loader';
-
+import { toast } from 'react-toastify';
 
 const ShopCardModal: React.FC<ShopCardModalProps> = ({ isOpen, onClose, title, price, rating, image, id, category }) => {
     const [isLoading, setIsLoading] = useState(true);
+    const [quantity, setQuantity] = useState(1);
+    const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
 
     useEffect(() => {
         if (isOpen) {
@@ -20,17 +21,58 @@ const ShopCardModal: React.FC<ShopCardModalProps> = ({ isOpen, onClose, title, p
         }
     }, [isOpen]);
 
+    useEffect(() => {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+        const itemExists = wishlist.some((item: any) => item.id === id);
+        setIsAddedToWishlist(itemExists);
+    }, [id]);
+
+    const handleAddToCart = () => {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const existingItemIndex = cart.findIndex((item: any) => item.id === id);
+
+        if (existingItemIndex !== -1) {
+            cart[existingItemIndex].quantity += quantity;
+        } else {
+            cart.push({
+                id,
+                image,
+                name: title,
+                price,
+                quantity,
+            });
+        }
+        toast.success(`${title} added to basket!`)
+        localStorage.setItem('cart', JSON.stringify(cart));
+        setQuantity(1);
+    };
+
+    const handleAddToWishlist = () => {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+        const itemExists = wishlist.some((item: any) => item.id === id);
+
+        if (!itemExists) {
+            wishlist.push({ id, title, image, price });
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            setIsAddedToWishlist(true);
+            toast.success(`${title} added to wishlist!`);
+        } else {
+            const updatedWishlist = wishlist.filter((item: any) => item.id !== id);
+            localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+            setIsAddedToWishlist(false);
+            toast.info(`${title} removed from wishlist!`);
+        }
+    };
+
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50" role="dialog" aria-labelledby="product-modal-title">
             {isLoading ? (
-
                 <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-10">
                     <Loader />
                 </div>
             ) : (
-
                 <motion.div
                     initial={{ rotateX: 90 }}
                     animate={{ rotateX: 0 }}
@@ -68,14 +110,22 @@ const ShopCardModal: React.FC<ShopCardModalProps> = ({ isOpen, onClose, title, p
                             <div className="flex items-center gap-2">
                                 <input
                                     type="number"
-                                    placeholder="0"
+                                    value={quantity}
+                                    onChange={(e) => setQuantity(Number(e.target.value))}
+                                    min={1}
                                     className="w-20 h-12 border text-center outline-none bg-transparent border-gray-400 rounded-sm"
                                 />
-                                <button className="bg-main text-white font-medium uppercase h-12 w-36 hover:bg-orange-600 transition duration-300">
+                                <button
+                                    onClick={handleAddToCart}
+                                    className="bg-main text-white font-medium uppercase h-12 w-36 hover:bg-orange-600 transition duration-300"
+                                >
                                     Buy now
                                 </button>
-                                <button className="bg-white w-12 h-12 flex items-center justify-center hover:text-main transition duration-300 rounded-full text-2xl">
-                                    <IoIosHeartEmpty />
+                                <button
+                                    onClick={handleAddToWishlist}
+                                    className="bg-white w-12 h-12 flex items-center justify-center hover:text-main transition duration-300 rounded-full text-2xl"
+                                >
+                                    {isAddedToWishlist ? <IoIosHeart /> : <IoIosHeartEmpty />}
                                 </button>
                             </div>
                             <p className="text-lg font-medium">

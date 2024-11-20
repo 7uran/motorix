@@ -29,8 +29,20 @@ export default function Login() {
         try {
             const response = await axios.post('http://localhost:3001/api/v1/auth/login', values);
             Cookies.set('userToken', response.data.token, { expires: 1 });
+            Cookies.set('userEmail', response.data.data.email);
+            Cookies.set('username', response.data.data.username);
+            console.log(response.data.data.isAdmin);
+            console.log(response);
+
+            if (response.data.data.isAdmin === true) {
+                Cookies.set('isAdmin', 'true', { expires: 1 });
+
+            } else {
+                Cookies.set('isAdmin', 'false', { expires: 1 });
+
+            }
             router.push('/wheels-and-tires');
-            toast.success("Login succesfully");
+            toast.success("Login successful");
         } catch (err) {
             console.error('Login failed:', err);
             toast.error("Incorrect email or password");

@@ -17,7 +17,7 @@ import { motion } from "framer-motion";
 export default function Page() {
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
-
+    const [quantity, setQuantity] = useState(1);
     const [product, setProduct] = useState<Product | null>(null);
     const [products, setProducts] = useState<RelatedProductsProps[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -26,6 +26,66 @@ export default function Page() {
     const [review, setReview] = useState("");
     const [name, setName] = useState("");
     const router = useRouter();
+
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuantity(Number(e.target.value));
+    };
+    const handleAddToWishlist = () => {
+        if (product) {
+            const productData = {
+                id: product._id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+            };
+
+            const currentWishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+
+
+            const existingProductIndex = currentWishlist.findIndex(
+                (item: { id: string }) => item.id === product._id
+            );
+
+            if (existingProductIndex === -1) {
+                currentWishlist.push(productData);
+                localStorage.setItem("wishlist", JSON.stringify(currentWishlist));
+                toast.success(`${product.name} added to wishlist!`);
+            } else {
+                toast.info(`${product.name} is already in your wishlist.`);
+            }
+        }
+    };
+
+    const handleAddToCart = () => {
+        if (quantity <= 0) {
+            toast.error("Please select a valid quantity.");
+            return;
+        }
+        if (product) {
+            const productData = {
+                id: product._id,
+                title: product.name,
+                price: product.price,
+                image: product.image,
+                quantity: quantity,
+            };
+
+            const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+            const existingProductIndex = currentCart.findIndex(
+                (item: { id: string }) => item.id === product._id
+            );
+
+            if (existingProductIndex !== -1) {
+                currentCart[existingProductIndex].quantity += quantity;
+            } else {
+                currentCart.push(productData);
+            }
+
+            localStorage.setItem("cart", JSON.stringify(currentCart));
+            toast.success(`${product.name} added to basket!`);
+        }
+    };
 
     useEffect(() => {
         if (id) {
@@ -155,13 +215,22 @@ export default function Page() {
                     <div className="flex items-center gap-2">
                         <input
                             type="number"
-                            placeholder="0"
+                            placeholder="1"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            min="1"
                             className="w-28 h-12 border text-center outline-none bg-transparent border-gray-400 rounded-sm"
                         />
-                        <button className="bg-main text-white font-medium uppercase h-12 w-36 hover:bg-orange-600 transition duration-300">
+                        <button
+                            onClick={handleAddToCart}
+                            className="bg-main text-white font-medium uppercase h-12 w-36 hover:bg-orange-600 transition duration-300"
+                        >
                             Buy now
                         </button>
-                        <button className="bg-white shadow-md w-12 h-12 flex items-center justify-center hover:text-main transition duration-300 rounded-full text-2xl">
+                        <button
+                            onClick={handleAddToWishlist}
+                            className="bg-white shadow-md w-12 h-12 flex items-center justify-center hover:text-main transition duration-300 rounded-full text-2xl"
+                        >
                             <IoIosHeartEmpty />
                         </button>
                     </div>

@@ -10,13 +10,13 @@ import { toast } from 'react-toastify';
 import registerBg from '../../assets/login-page-bg.png';
 import { useRouter } from 'next/navigation';
 
-// Validation schema with Yup
+
 const validationSchema = Yup.object({
     username: Yup.string().required('Username is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'Passwords must match') // `null` yerine `undefined` kullanarak referansı kontrol et
+        .oneOf([Yup.ref('password')], 'Passwords must match') 
         .required('Confirm password is required'),
 });
 
@@ -25,7 +25,7 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const router = useRouter()
-    // Formik hook
+  
     const formik = useFormik({
         initialValues: {
             username: '',
