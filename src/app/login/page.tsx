@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import ButtonLoader from '@/components/ButtonLoader';
 
 const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -128,7 +129,7 @@ export default function Login() {
                                             className="w-full py-3 flex items-center justify-center uppercase font-semibold text-lg text-white bg-[#F26515] hover:bg-[#e25b14] focus:outline-none focus:ring-2 focus:ring-[#F26515]"
                                             disabled={isSubmitting}
                                         >
-                                            {isSubmitting ? <Image className="animate-spin" src={"https://static.thenounproject.com/png/119081-512.png"} alt="Loading..." width={30} height={30} /> : 'Login'}
+                                            {isSubmitting ? <ButtonLoader /> : 'Login'}
                                         </button>
                                     </Form>
                                 )}

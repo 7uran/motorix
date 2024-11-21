@@ -29,7 +29,7 @@ const RightSidebar = ({
     const isAdmin = Cookies.get('isAdmin') === 'true';
 
     return (
-        <div className={`fixed top-0 right-0 h-full w-80 bg-[#212020] text-white p-8 shadow-lg transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`fixed z-50 top-0 right-0 h-full w-80 bg-[#212020] text-white p-8 shadow-lg transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             <button
                 onClick={toggleSidebar}
                 className="absolute top-4 right-4 text-white text-3xl"

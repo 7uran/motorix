@@ -118,7 +118,7 @@ const Header = () => {
                                                     <Image alt="" width={81} height={81} src={`http://localhost:3001/${item.image}`} />
                                                 </div>
                                                 <div className="flex flex-col gap-4 flex-1">
-                                                    <p className="text-xl font-medium">{item.title}</p>
+                                                    <p className="text-xl font-medium">{item.name}</p>
                                                     <p>{item.quantity} x ${item.price}</p>
                                                 </div>
                                                 <button

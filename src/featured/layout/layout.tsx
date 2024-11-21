@@ -11,7 +11,9 @@ import Cookies from "js-cookie";
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname();
     const router = useRouter();
-    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog', '/checkout'];
+
+
+    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog', '/checkout', '/cart'];
     const showHeaderFooter = pagesWithHeaderFooter.includes(pathname) || pathname.startsWith('/our-team') || pathname.includes('/blog/') || pathname.includes('/shop/');
 
     const [loading, setLoading] = useState(true);
@@ -22,9 +24,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }, 1500);
 
 
-        if (!Cookies.get("userToken") && pathname !== "/login" && pathname !== "/signup") {
-            router.push("/login");
-        }
+
 
         return () => clearTimeout(timer);
     }, [pathname, router]);
