@@ -5,7 +5,7 @@ import { PiDotsNineBold } from "react-icons/pi";
 import { CiSearch } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import { navItems } from '@/static/mockdb';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation'; // Import useRouter
 import Link from 'next/link';
 import RightSidebar from '@/components/RightSidebar';
 import Cookies from 'js-cookie';
@@ -16,9 +16,11 @@ const Header = () => {
     const [isBasketMenuOpen, setIsBasketMenuOpen] = useState(false);
     const [cartItems, setCartItems] = useState<any[]>([]);
     const pathname = usePathname();
+    const router = useRouter(); // Initialize useRouter hook
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [userEmail, setUserEmail] = useState<string | null>(null);
     const [username, setUsername] = useState<string | null>(null);
+    const [searchTerm, setSearchTerm] = useState(""); // Add searchTerm state
 
     useEffect(() => {
         const email = Cookies.get('userEmail') || null;
@@ -48,6 +50,13 @@ const Header = () => {
         setIsBasketMenuOpen(!isBasketMenuOpen);
         if (!isBasketMenuOpen) {
             loadCartItems();
+        }
+    };
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchTerm.trim()) {
+            router.push(`/shop?search=${searchTerm}`);
         }
     };
 
@@ -100,11 +109,6 @@ const Header = () => {
                 <div className='flex items-center gap-6'>
                     <button onClick={toggleBasketMenu} className="relative flex items-center justify-center p-2">
                         <BsBagDash className="text-white text-3xl" />
-                        {cartItems.length > 0 && (
-                            <span className="absolute bottom-0 right-0 bg-main text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                                {cartItems.length}
-                            </span>
-                        )}
                     </button>
 
                     {isBasketMenuOpen && (
@@ -180,14 +184,18 @@ const Header = () => {
                         <Image alt='Motorix Logo' width={198} height={27} src={"https://motorix.themerex.net/wp-content/uploads/2024/01/logo-inverse.png"} />
                     </div>
                     <div className='mx-auto md:max-w-[1293px] flex items-center py-20 md:py-28'>
-                        <input
-                            type="text"
-                            placeholder="Type words and hit enter"
-                            className="md:py-6 text-xl md:text-4xl placeholder-white w-full bg-transparent border-b border-gray-500 focus:outline-none md:p-2"
-                        />
-                        <button className='-translate-x-10 text-3xl'>
-                            <CiSearch />
-                        </button>
+                        <form onSubmit={handleSearch} className="flex items-center w-full">
+                            <input
+                                type="text"
+                                placeholder="Type words and hit enter"
+                                className="md:py-6 text-xl md:text-4xl bg-transparent text-white border-b border-b-gray-500 w-full py-3 outline-none "
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <button className="w-[60px] h-[60px]  flex justify-center items-center text-3xl ml-4 rounded-md">
+                                <CiSearch />
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

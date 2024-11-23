@@ -3,13 +3,12 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-const Custom404 = () => {
+export default function NotFound() {
     const router = useRouter();
 
     const handleRedirect = () => {
         router.push('/');
     };
-
     return (
         <div className="text-center py-16 flex items-center flex-col min-h-screen gap-3 bg-white">
             <h1 className="text-[270px] font-medium">404</h1>
@@ -23,7 +22,6 @@ const Custom404 = () => {
                 homepage
             </button>
         </div>
-    );
-};
+    )
+}
 
-export default Custom404;

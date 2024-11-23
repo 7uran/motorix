@@ -53,7 +53,7 @@ export default function WheelsAndTires() {
         const product = shopCards.find(card => card._id === id);
         if (product) {
             setSelectedProduct(product);
-         
+
 
             setIsModalOpen(true);
         }
@@ -171,11 +171,12 @@ export default function WheelsAndTires() {
                                 className="w-fit"
                             >
                                 <ProductCard
-                                    img={card.image}
+                                    image={card.image}
                                     title={card.name}
                                     rating={card.rating}
                                     price={card.price}
                                     url={`shop/product?id=${card._id}`}
+                                    id={card._id}
                                 />
                             </motion.div>
                         ))}

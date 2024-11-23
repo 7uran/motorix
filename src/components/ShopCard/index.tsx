@@ -160,6 +160,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ title, price, rating, image, id, ca
                         <div className="flex flex-col gap-3">
                             <button
                                 className="bg-main w-full uppercase text-white flex items-center gap-2 font-medium justify-center py-3"
+                                onClick={() => router.push("/wishlist")}
                             >
                                 <FaRegHeart />
                                 View Wishlist

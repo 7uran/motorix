@@ -205,11 +205,12 @@ export interface Product {
 
 
 export interface ProductCardProps {
-    img: string;
+    image: string;
     title: string;
     rating: number;
     price: number;
     url: string;
+    id:string
 }
 
 export interface RelatedProductsProps {

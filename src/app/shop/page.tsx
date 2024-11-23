@@ -9,7 +9,7 @@ import ShopCard from "@/components/ShopCard";
 import "react-double-range-slider/dist/cjs/index.css";
 import PriceRangeSlider from "@/components/PriceRangeSlider";
 import { MdOutlineStar } from "react-icons/md";
-
+import { useSearchParams } from "next/navigation";  // Use useSearchParams to get the query params
 
 interface ShopCardData {
     _id: string;
@@ -18,9 +18,8 @@ interface ShopCardData {
     rating: number;
     image: string;
     category: string;
-    brand: string
+    brand: string;
 }
-
 
 interface ShopPageProps { }
 
@@ -30,6 +29,47 @@ const ShopPage: React.FC<ShopPageProps> = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 1200]);
     const [shopCards, setShopCards] = useState<ShopCardData[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
+
+    const searchParams = useSearchParams(); // Get search params from the URL
+    const searchQuery = searchParams.get("search"); // Extract the search query value
+
+    useEffect(() => {
+        if (searchQuery) {
+            setSearchTerm(searchQuery); // Set the search term from URL if available
+        }
+    }, [searchQuery]);
+
+    useEffect(() => {
+        const fetchShopCards = async () => {
+            const data = await getData("http://localhost:3001/api/v1/shopCards");
+
+            if (data && Array.isArray(data.shopCards)) {
+                setShopCards(data.shopCards);
+            } else {
+                console.error("Invalid data format:", data);
+                setShopCards([]);
+            }
+        };
+
+        fetchShopCards();
+    }, []);
+
+    const filteredShopCards = React.useMemo(
+        () =>
+            shopCards.filter((card) => {
+                const matchesCategory = !selectedCategory || card.category === selectedCategory;
+                const matchesRating = selectedRatings.length === 0 || selectedRatings.includes(card.rating);
+                const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(card.brand);
+                const matchesPrice =
+                    card.price >= priceRange[0] && card.price <= priceRange[1];
+                const matchesSearchTerm =
+                    !searchTerm || card.name.toLowerCase().includes(searchTerm.toLowerCase()); // Search filter
+
+                return matchesCategory && matchesRating && matchesBrand && matchesPrice && matchesSearchTerm;
+            }),
+        [shopCards, selectedCategory, selectedRatings, selectedBrands, priceRange, searchTerm]
+    );
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, checked } = e.target;
@@ -57,36 +97,6 @@ const ShopPage: React.FC<ShopPageProps> = () => {
     const handlePriceChange = (value: number[]) => {
         setPriceRange(value as [number, number]);
     };
-
-    useEffect(() => {
-        const fetchShopCards = async () => {
-            const data = await getData("http://localhost:3001/api/v1/shopCards");
-
-            if (data && Array.isArray(data.shopCards)) {
-                setShopCards(data.shopCards);
-            } else {
-                console.error("Invalid data format:", data);
-                setShopCards([]);
-            }
-        };
-
-        fetchShopCards();
-    }, []);
-
-
-    const filteredShopCards = React.useMemo(
-        () =>
-            shopCards.filter((card) => {
-                const matchesCategory = !selectedCategory || card.category === selectedCategory;
-                const matchesRating = selectedRatings.length === 0 || selectedRatings.includes(card.rating);
-                const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(card.brand);
-                const matchesPrice =
-                    card.price >= priceRange[0] && card.price <= priceRange[1];
-
-                return matchesCategory && matchesRating && matchesBrand && matchesPrice;
-            }),
-        [shopCards, selectedCategory, selectedRatings, selectedBrands, priceRange]
-    );
 
     return (
         <div className="bg-white">
@@ -173,8 +183,7 @@ const ShopPage: React.FC<ShopPageProps> = () => {
                     />
                 </div>
 
-                <div className="flex-1 justify-center md:justify-normal grid md:grid-cols-4 gap-6 py-10
-                ">
+                <div className="flex-1 justify-center md:justify-normal grid md:grid-cols-4 gap-6 py-10">
                     {filteredShopCards.map((card) => (
                         <ShopCard
                             key={card._id}

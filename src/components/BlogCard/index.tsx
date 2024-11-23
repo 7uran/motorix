@@ -2,11 +2,10 @@ import { BlogCardProps } from '@/types/type';
 import Image from 'next/image';
 import React from 'react';
 import { LuDot } from 'react-icons/lu';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 const BlogCard: React.FC<BlogCardProps> = ({ _id, title, img, content, commentCount }) => {
-    const router = useRouter();
-
+    const pathname = usePathname();
 
     const createSlug = (title: string) => {
         return title
@@ -18,7 +17,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ _id, title, img, content, commentCo
 
     const handleClick = () => {
         const slug = createSlug(title);
-        router.push(`/blog/${slug}?id=${_id}`);
+        const targetUrl = pathname.includes('dashboard')
+            ? `/dashboard/dashboard-blog/${slug}?id=${_id}`
+            : `/blog/${slug}?id=${_id}`;
+        window.location.href = targetUrl;
     };
 
     return (

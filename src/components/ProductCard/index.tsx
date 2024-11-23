@@ -1,23 +1,49 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaStar } from "react-icons/fa";
-import { IoHeartOutline } from "react-icons/io5";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { GoArrowRight } from "react-icons/go";
+import { GoArrowRight, GoHeart, GoHeartFill } from "react-icons/go";
 import { useRouter } from 'next/navigation';
 import { ProductCardProps } from '@/types/type';
 
-const ProductCard: React.FC<ProductCardProps> = ({ img, title, rating, price, url }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ image, title, rating, price, url, id }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const [wishlist, setWishlist] = useState<any[]>([]);
     const router = useRouter();
+
+
+    useEffect(() => {
+        const storedWishlist = localStorage.getItem('wishlist');
+        if (storedWishlist) {
+            setWishlist(JSON.parse(storedWishlist));
+        }
+    }, []);
+
+
+    const isItemInWishlist = wishlist.some(item => item.id === id);
 
     const handleRedirect = () => {
         if (url) {
             router.push(url);
         } else {
             console.error("URL is undefined or invalid");
-            console.log(url)
         }
+    };
+
+    const handleToggleWishlist = () => {
+        let updatedWishlist;
+        if (isItemInWishlist) {
+
+            updatedWishlist = wishlist.filter(item => item.id !== id);
+        } else {
+
+            const newItem = { id, title, image, price };
+            updatedWishlist = [...wishlist, newItem];
+        }
+
+        setWishlist(updatedWishlist);
+        localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+        console.log(isItemInWishlist ? 'Removed from wishlist' : 'Added to wishlist', { id, title });
     };
 
     const formattedPrice = new Intl.NumberFormat('en-US', {
@@ -37,16 +63,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ img, title, rating, price, ur
                     alt={title}
                     width={410}
                     height={410}
-                    src={`http://localhost:3001/${img}`}
+                    src={`http://localhost:3001/${image}`}
                 />
                 <div className="absolute z-[1] top-0 flex gap-2 w-full h-full items-center justify-center">
                     <button
-                        className={`hover:text-main hover:-translate-y-1 transition-all duration-300 ease-in-out bg-white rounded-full w-12 h-12 flex items-center justify-center text-gray-600 text-xl ${isHovered ? "opacity-100" : "opacity-0"}`}
+                        className={`hover:text-main hover:-translate-y-1 transition-all duration-300 ease-in-out bg-white rounded-full w-12 h-12 flex items-center justify-center z text-xl ${isHovered ? "opacity-100" : "opacity-0"}`}
+                        onClick={handleToggleWishlist}
                     >
-                        <IoHeartOutline />
+                        {isItemInWishlist ? <GoHeartFill /> : <GoHeart />}
                     </button>
                     <button
                         className={`hover:text-main hover:-translate-y-1 transition-all duration-300 ease-in-out bg-white rounded-full w-12 h-12 flex items-center justify-center text-gray-600 text-xl ${isHovered ? "opacity-100" : "opacity-0"}`}
+                        onClick={handleRedirect}
                     >
                         <HiOutlineShoppingCart />
                     </button>

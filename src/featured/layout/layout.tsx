@@ -1,4 +1,5 @@
 "use client";
+
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import { usePathname, useRouter } from "next/navigation";
@@ -9,11 +10,10 @@ import Loader from "@/components/Loader";
 import Cookies from "js-cookie";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const pathname = usePathname();
-    const router = useRouter();
+    const pathname = usePathname(); 
+    const router = useRouter();     
 
-
-    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog', '/checkout', '/cart'];
+    const pagesWithHeaderFooter = ['/wheels-and-tires', '/shop', '/faqs', '/pricing', '/contact', '/blog', '/checkout', '/cart', '/wishlist'];
     const showHeaderFooter = pagesWithHeaderFooter.includes(pathname) || pathname.startsWith('/our-team') || pathname.includes('/blog/') || pathname.includes('/shop/');
 
     const [loading, setLoading] = useState(true);
@@ -21,13 +21,17 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false);
-        }, 1500);
-
-
-
+        }, 1500); 
 
         return () => clearTimeout(timer);
     }, [pathname, router]);
+
+   
+    useEffect(() => {
+        if (!showHeaderFooter && pathname !== "/error") {
+            router.push("/error");
+        }
+    }, [pathname, showHeaderFooter, router]);
 
     return (
         <main>

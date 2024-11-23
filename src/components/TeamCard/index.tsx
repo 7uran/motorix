@@ -7,19 +7,24 @@ import { TbBrandDribbbleFilled } from "react-icons/tb";
 import { FaInstagram } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { TeamCardProps } from '@/types/type';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation'; // usePathname'ı import ediyoruz
 import Link from 'next/link';
 
 const TeamCard: React.FC<TeamCardProps> = ({ img, name, job, id }) => {
     const [hovered, setHovered] = useState(false);
-    const router = useRouter();
+    const pathname = usePathname(); // usePathname hook'u ile mevcut yolu alıyoruz
     const toSlug = (name: string): string => name.toLowerCase().replace(/\s+/g, '-');
+
+    // Check if the current path includes '/dashboard'
+    const targetPath = pathname.includes('/dashboard')
+        ? `/dashboard/${toSlug(name)}?id=${id}`
+        : `/our-team/${toSlug(name)}?id=${id}`;
 
     return (
         <div className='flex flex-col gap-5 w-fit group cursor-pointer'
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
-            <Link href={`/our-team/${toSlug(name)}?id=${id}`}>
+            <Link href={targetPath}>
                 <div className='w-[410px] h-[500px] overflow-hidden relative'>
                     <Image
                         className='group-hover:scale-105 transition duration-300 object-cover'
