@@ -6,7 +6,7 @@ import EditUserModal from "@/components/EditUserModal";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Sidebar from "@/components/DashboardSidebar";
+import Sidebar from "@/components/AdminSidebar";
 
 
 interface User {

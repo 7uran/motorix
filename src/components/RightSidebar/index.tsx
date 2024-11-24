@@ -50,10 +50,10 @@ const RightSidebar = ({
                 {isAdmin && (
                     <li className="mb-4">
                         <a
-                            href="/dashboard"
+                            href="/admin"
                             className="text-lg text-main hover:underline"
                         >
-                            Go to Dashboard
+                            Go to Admin Panel
                         </a>
                     </li>
                 )}

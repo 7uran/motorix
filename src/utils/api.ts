@@ -19,7 +19,7 @@ export const getData = async (url: string) => {
 
 export const handleGetData = async (customUrl: string) => {
     const data = await getData(customUrl);
-    console.log(data);
+  
 };
 
 

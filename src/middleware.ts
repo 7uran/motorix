@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-const protectedRoutes = ['/home', '/blog', '/about', '/features', '/contact', '/payment', '/shop', '/checkout', '/cart', '/dashboard'];
+const protectedRoutes = ['/home', '/blog', '/about', '/features', '/contact', '/payment', '/shop', '/checkout', '/cart', '/admin'];
 const publicRoutes = ['/', '/signup', '/login'];
 
 export default async function middleware(req: NextRequest) {
@@ -11,19 +11,25 @@ export default async function middleware(req: NextRequest) {
 
     const cookie = cookies().get('userToken')?.value;
     const isAdmin = cookies().get('isAdmin')?.value === 'true';
+    const referrer = req.headers.get('referer') || '';
+
 
     if (isProtectedRoute && !cookie) {
         return NextResponse.redirect(new URL('/login', req.nextUrl));
     }
 
 
-    if (path.startsWith('/dashboard') && (!cookie || !isAdmin)) {
+    if (path.startsWith('/admin') && (!cookie || !isAdmin)) {
+        return NextResponse.redirect(new URL('/wheels-and-tires', req.nextUrl));
+    }
+
+    if (isPublicRoute && cookie) {
         return NextResponse.redirect(new URL('/wheels-and-tires', req.nextUrl));
     }
 
 
-    if (isPublicRoute && cookie) {
-        return NextResponse.redirect(new URL('/wheels-and-tires', req.nextUrl));
+    if ((path === '/success' || path === '/fail') && !referrer.includes('/checkout')) {
+        return NextResponse.redirect(new URL('/checkout', req.nextUrl));
     }
 
 

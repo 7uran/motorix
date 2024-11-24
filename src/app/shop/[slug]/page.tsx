@@ -415,7 +415,8 @@ export default function Page() {
                             className="w-fit"
                         >
                             <ProductCard
-                                img={product.image}
+                                id={product._id}
+                                image={product.image}
                                 title={product.name}
                                 rating={product.rating}
                                 price={product.price}

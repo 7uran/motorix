@@ -1,10 +1,10 @@
 "use client";
-import Sidebar from '@/components/DashboardSidebar';
+import Sidebar from '@/components/AdminSidebar';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-const Dashboard = () => {
+const Admin = () => {
     const pathname = usePathname();
     const [userName, setUserName] = useState("");
 
@@ -47,13 +47,13 @@ const Dashboard = () => {
                     <p className="text-[#191919] opacity-70 mb-6">Navigate easily to different sections of your dashboard.</p>
                     <ul className="space-y-4">
                         <li>
-                            <Link href="/dashboard/dashboard-blog" className="text-[#F46E21] hover:underline hover:text-[#FFB84C]">Manage Blog</Link>
+                            <Link href="/admin/admin-blog" className="text-[#F46E21] hover:underline hover:text-[#FFB84C]">Manage Blog</Link>
                         </li>
                         <li>
-                            <Link href="/dashboard/dashboard-users" className="text-[#F46E21] hover:underline hover:text-[#FFB84C]">Manage Users</Link>
+                            <Link href="/admin/admin-users" className="text-[#F46E21] hover:underline hover:text-[#FFB84C]">Manage Users</Link>
                         </li>
                         <li>
-                            <Link href="/dashboard/dashboard-shop" className="text-[#F46E21] hover:underline hover:text-[#FFB84C]">Shop Cards</Link>
+                            <Link href="/admin/admin-shop" className="text-[#F46E21] hover:underline hover:text-[#FFB84C]">Shop Cards</Link>
                         </li>
                     </ul>
                 </div>
@@ -62,4 +62,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default Admin;

@@ -5,12 +5,12 @@ import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { GoArrowRight, GoHeart, GoHeartFill } from "react-icons/go";
 import { useRouter } from 'next/navigation';
 import { ProductCardProps } from '@/types/type';
+import { toast } from 'react-toastify';
 
 const ProductCard: React.FC<ProductCardProps> = ({ image, title, rating, price, url, id }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [wishlist, setWishlist] = useState<any[]>([]);
     const router = useRouter();
-
 
     useEffect(() => {
         const storedWishlist = localStorage.getItem('wishlist');
@@ -18,7 +18,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, rating, price, 
             setWishlist(JSON.parse(storedWishlist));
         }
     }, []);
-
 
     const isItemInWishlist = wishlist.some(item => item.id === id);
 
@@ -33,17 +32,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, rating, price, 
     const handleToggleWishlist = () => {
         let updatedWishlist;
         if (isItemInWishlist) {
-
             updatedWishlist = wishlist.filter(item => item.id !== id);
+            setWishlist(updatedWishlist);
+            localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+            toast.info("Removed from wishlist");
         } else {
-
             const newItem = { id, title, image, price };
             updatedWishlist = [...wishlist, newItem];
+            setWishlist(updatedWishlist);
+            localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+            toast.success("Added to wishlist");
         }
-
-        setWishlist(updatedWishlist);
-        localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
-        console.log(isItemInWishlist ? 'Removed from wishlist' : 'Added to wishlist', { id, title });
     };
 
     const formattedPrice = new Intl.NumberFormat('en-US', {

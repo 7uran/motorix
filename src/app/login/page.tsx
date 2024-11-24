@@ -20,6 +20,7 @@ const validationSchema = Yup.object({
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
     const router = useRouter();
 
     const togglePasswordVisibility = () => {
@@ -37,11 +38,11 @@ export default function Login() {
 
             if (response.data.data.isAdmin === true) {
                 Cookies.set('isAdmin', 'true', { expires: 1 });
-
             } else {
                 Cookies.set('isAdmin', 'false', { expires: 1 });
-
             }
+
+            setIsLoggedIn(true); // Mark login as successful
             router.push('/wheels-and-tires');
             toast.success("Login successful");
         } catch (err) {
@@ -127,9 +128,9 @@ export default function Login() {
                                         <button
                                             type="submit"
                                             className="w-full py-3 flex items-center justify-center uppercase font-semibold text-lg text-white bg-[#F26515] hover:bg-[#e25b14] focus:outline-none focus:ring-2 focus:ring-[#F26515]"
-                                            disabled={isSubmitting}
+                                            disabled={isSubmitting || isLoggedIn}
                                         >
-                                            {isSubmitting ? <ButtonLoader /> : 'Login'}
+                                            {isSubmitting || isLoggedIn ? <ButtonLoader /> : 'Login'}
                                         </button>
                                     </Form>
                                 )}

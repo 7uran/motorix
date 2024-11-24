@@ -9,23 +9,23 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import registerBg from '../../assets/login-page-bg.png';
 import { useRouter } from 'next/navigation';
-
+import ButtonLoader from '@/components/ButtonLoader';
 
 const validationSchema = Yup.object({
     username: Yup.string().required('Username is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password')], 'Passwords must match') 
+        .oneOf([Yup.ref('password')], 'Passwords must match')
         .required('Confirm password is required'),
 });
-
 
 export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const router = useRouter()
-  
+    const [signupdada, setSignupdada] = useState(false);
+    const router = useRouter();
+
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -50,12 +50,15 @@ export default function Register() {
 
                 if (!response.ok) {
                     toast.error(data.message || 'Something went wrong');
+                    setSignupdada(false);
                 } else {
                     toast.success('Registration successful');
-                    router.push("/login")
+                    setSignupdada(true); 
+                    router.push("/login");
                 }
             } catch (err) {
                 toast.error('An error occurred while registering.');
+                setSignupdada(false);
             }
         },
     });
@@ -178,9 +181,9 @@ export default function Register() {
                                 <button
                                     type="submit"
                                     className="w-full py-3 flex items-center justify-center uppercase font-semibold text-lg text-white bg-[#F26515] hover:bg-[#e25b14] focus:outline-none focus:ring-2 focus:ring-[#F26515]"
-                                    disabled={formik.isSubmitting}
+                                    disabled={signupdada || formik.isSubmitting} 
                                 >
-                                    {formik.isSubmitting ? <Image className="animate-spin" src={"https://static.thenounproject.com/png/119081-512.png"} alt="Loading..." width={30} height={30} />
+                                    {formik.isSubmitting ? <ButtonLoader />
                                         : 'Register'}
                                 </button>
                             </form>

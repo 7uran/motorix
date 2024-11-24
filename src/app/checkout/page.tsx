@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState, useEffect } from "react";
 import PageBanner from "@/components/PageBanner";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -37,9 +37,11 @@ export default function Checkout() {
         const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = evt.target;
 
-            if (name === 'number' && value.length <= 16) {
+            if (name === 'number' && /^[0-9]*$/.test(value) && value.length <= 16) {
                 setState((prev) => ({ ...prev, [name]: value }));
-            } else if ((name === 'expiry' || name === 'cvc') && value.length <= 4) {
+            } else if (name === 'expiry' && /^[0-9]*$/.test(value) && value.length <= 4) {
+                setState((prev) => ({ ...prev, [name]: value }));
+            } else if (name === 'cvc' && /^[0-9]*$/.test(value) && value.length <= 3) {
                 setState((prev) => ({ ...prev, [name]: value }));
             } else if (name === 'name') {
                 setState((prev) => ({ ...prev, [name]: value }));
@@ -62,7 +64,6 @@ export default function Checkout() {
                 router.push('/fail');
                 return;
             }
-
 
             localStorage.removeItem('cart');
             router.push('/success');

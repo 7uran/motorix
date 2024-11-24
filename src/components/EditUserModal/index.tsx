@@ -37,8 +37,8 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ userId, onClose, onSave }
 
     const handleSave = () => {
         if (user) {
-            onSave(user); 
-            onClose(); 
+            onSave(user);
+            onClose();
         }
     };
 
@@ -48,8 +48,9 @@ const EditUserModal: React.FC<EditUserModalProps> = ({ userId, onClose, onSave }
             setUser({ ...user, [name]: value });
         }
     };
+    console.log(FormData);
 
-    if (!user) return null; // Show loading state until user data is fetched
+    if (!user) return null;
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">

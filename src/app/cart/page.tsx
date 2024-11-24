@@ -127,19 +127,23 @@ export default function Cart() {
                                 <div className="md:w-[615px]  bg-white border border-gray-200 p-6">
                                     <div className="flex flex-col gap-4">
                                         <div className="flex justify-between items-center">
-                                            <span className=" text-lg w-1/3 ">Subtotal</span>
-                                            <span className="text-lg ">$297.00</span>
+                                            <span className="text-lg w-1/3">Subtotal</span>
+                                            <span className="text-lg">
+                                                ${cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
+                                            </span>
                                         </div>
                                         <div className="flex justify-between items-center text-lg">
-                                            <span className="font-medium text-lg w-1/3 ">Shipping</span>
-                                            Flat rate Shipping to 79 South Green Cowley Extension, <br />
-                                            Impedit magna sequi, Laudantium quas sap, <br />
-                                            NY 23855.
+                                            <span className="font-medium text-lg w-1/3">Shipping</span>
+                                            <span className="text-lg">Flat rate Shipping to 79 South Green Cowley Extension, NY 23855.</span>
                                         </div>
 
-                                        <div className="flex justify-between items-center  border-gray-300 pt-4">
+                                        <div className="flex justify-between items-center border-gray-300 pt-4">
                                             <span className="font-medium text-lg w-1/3 text-gray-600">Total</span>
-                                            <span className="text-xl ">$297.00</span>
+                                            <span className="text-xl">
+                                                ${(
+                                                    cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + 15
+                                                ).toFixed(2)}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

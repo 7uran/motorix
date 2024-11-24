@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import BlogCard from "@/components/BlogCard";
-import Sidebar from "@/components/DashboardSidebar";
+import Sidebar from "@/components/AdminSidebar";
 
 
 type Blog = {

@@ -17,8 +17,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ _id, title, img, content, commentCo
 
     const handleClick = () => {
         const slug = createSlug(title);
-        const targetUrl = pathname.includes('dashboard')
-            ? `/dashboard/dashboard-blog/${slug}?id=${_id}`
+        const targetUrl = pathname.includes('admin')
+            ? `/admin/admin-blog/${slug}?id=${_id}`
             : `/blog/${slug}?id=${_id}`;
         window.location.href = targetUrl;
     };

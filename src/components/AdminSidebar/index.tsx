@@ -9,18 +9,20 @@ export default function Sidebar() {
     return (
         <div className="w-64 h-screen bg-[#191919] text-white fixed top-0 left-0">
             <div className="p-5 text-xl font-semibold">
-                <Image
-                    width={198}
-                    height={27}
-                    alt="Logo"
-                    src="https://motorix.themerex.net/wp-content/uploads/2024/01/logo-inverse.png"
-                />
+                <Link href="/">
+                    <Image
+                        width={198}
+                        height={27}
+                        alt="Logo"
+                        src="https://motorix.themerex.net/wp-content/uploads/2024/01/logo-inverse.png"
+                    />
+                </Link>
             </div>
             <ul className="mt-6 space-y-4">
                 <li>
                     <Link
-                        href="/dashboard/dashboard-blog"
-                        className={`block px-4 py-2 rounded ${pathname === "/dashboard/dashboard-blog"
+                        href="/admin/admin-blog"
+                        className={`block px-4 py-2 rounded ${pathname === "/admin/admin-blog"
                             ? "bg-[#F46E21]"
                             : "hover:bg-[#F46E21]"
                             }`}
@@ -31,8 +33,8 @@ export default function Sidebar() {
 
                 <li>
                     <Link
-                        href="/dashboard/dashboard-users"
-                        className={`block px-4 py-2 rounded ${pathname === "/dashboard/dashboard-users"
+                        href="/admin/admin-users"
+                        className={`block px-4 py-2 rounded ${pathname === "/admin/admin-users"
                             ? "bg-[#F46E21]"
                             : "hover:bg-[#F46E21] transition"
                             }`}
@@ -42,8 +44,8 @@ export default function Sidebar() {
                 </li>
                 <li>
                     <Link
-                        href="/dashboard/dashboard-shop"
-                        className={`block px-4 py-2 rounded ${pathname === "/dashboard/dashboard-shop"
+                        href="/admin/admin-shop"
+                        className={`block px-4 py-2 rounded ${pathname === "/admin/admin-shop"
                             ? "bg-[#F46E21]"
                             : "hover:bg-[#F46E21] transition"
                             }`}
